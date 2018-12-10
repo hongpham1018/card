@@ -15,10 +15,27 @@ const DATA = [
 export default class App extends Component {
   render() {
     return (
-        <Deck  data = {DATA} renderCard={this.renderCard}/>
+        <Deck  data = {DATA}
+        renderCard={this.renderCard}
+        onSwipeRight = {()=>
+          console.log ('swipping right')
+        }
+        onSwipeLeft= {()=>
+          console.log ('swipping Left')
+        }
+        renderNoMoreCards ={this.renderNoMoreCards}/>
+
     );
   }
-
+renderNoMoreCards(){
+  return (
+    <Card title = "All Done!">
+      <Text style ={{marginBottom:10}} />
+      <Button backgroundColor="#03A9F4"
+        title="get more!" />
+    </Card>
+  )
+}
 renderCard(item){
   return (
     <View>
@@ -26,20 +43,15 @@ renderCard(item){
       title = {item.text}
       image={{uri:item.uri}}
       key = {item.id}>
-    </Card>
+
     <Text style={{marginBottom:10}}>
       can customize the card further
     </Text>
     <Button icon = {{name:'code'}}
       backgroundColor = "#03A9F4"
       title="View Now!" />
+          </Card>
     </View>
   )
 }
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff'
-  },
-});
